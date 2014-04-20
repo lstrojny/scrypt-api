@@ -100,9 +100,9 @@ namespace lstrojny\scrypt {
     use lstrojny\scrypt\exception\InvalidArgumentException;
     use lstrojny\scrypt\exception\RuntimeException;
 
-    function hash($secret, $salt, array $options = [])
+    function hash($secret, $salt, array $options = array())
     {
-        $defaults = ['cpu_cost' => pow(2, 14), 'memory_cost' => 8, 'parallelization_cost' => 1, 'key_length' => 64];
+        $defaults = array('cpu_cost' => pow(2, 14), 'memory_cost' => 8, 'parallelization_cost' => 1, 'key_length' => 64);
         $options  = array_merge($defaults, $options);
 
         $optionsDiff = array_diff_key($options, $defaults);
@@ -181,21 +181,21 @@ namespace lstrojny\scrypt {
 
         return implode(
             '$',
-            [
+            array(
                 $options['cpu_cost'],
                 $options['memory_cost'],
                 $options['parallelization_cost'],
                 $options['key_length'],
                 $salt,
                 $key,
-            ]
+            )
         );
     }
 
     function compare($hash, $secret)
     {
         list($cpuCost, $memoryCost, $parallelizationCost, $keyLength, $salt) = array_replace(
-            ['', '', '' ,'', ''],
+            array('', '', '' ,'', ''),
             explode('$', $hash)
         );
 
@@ -205,12 +205,12 @@ namespace lstrojny\scrypt {
             return false;
         }
 
-        $options = [
+        $options = array(
             'cpu_cost'             => $cpuCost,
             'memory_cost'          => $memoryCost,
             'parallelization_cost' => $parallelizationCost,
             'key_length'           => $keyLength,
-        ];
+        );
 
         $salt = base64_decode($salt, true);
 

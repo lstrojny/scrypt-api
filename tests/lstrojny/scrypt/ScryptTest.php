@@ -9,7 +9,10 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
     public function testHash()
     {
-        $this->assertSame($this->hash, scrypt\hash('foo', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', ['cpu_cost' => pow(2, 16)]));
+        $this->assertSame(
+            $this->hash,
+            scrypt\hash('foo', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', array('cpu_cost' => pow(2, 16)))
+        );
 
         $this->assertTrue(scrypt\compare($this->hash, 'foo'));
         $this->assertFalse(scrypt\compare($this->hash, 'bar'));
@@ -17,16 +20,16 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
     public function getCompareErrorStrings()
     {
-        return [
-            [''],
-            ['$$$$$'],
-            ['1024$$$$$'],
-            ['1024$1$$$$'],
-            ['1024$1$1$$$'],
-            ['1024$1$1$16$$'],
-            ['1024$1$1$16$$hash'],
-            ['1024$1$1$16$äöä$hash'],
-        ];
+        return array(
+            array(''),
+            array('$$$$$'),
+            array('1024$$$$$'),
+            array('1024$1$$$$'),
+            array('1024$1$1$$$'),
+            array('1024$1$1$16$$'),
+            array('1024$1$1$16$$hash'),
+            array('1024$1$1$16$äöä$hash'),
+        );
     }
 
     /** @dataProvider getCompareErrorStrings */
@@ -37,83 +40,83 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
 
     public static function getErrors()
     {
-        return [
-            [
+        return array(
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['cpu_cost' => 100],
+                array('cpu_cost' => 100),
                 'Invalid value of key "cpu_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): not a power of two greater than 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['cpu_cost' => 0],
+                array('cpu_cost' => 0),
                 'Invalid value of key "cpu_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): not a power of two greater than 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['cpu_cost' => -1],
+                array('cpu_cost' => -1),
                 'Invalid value of key "cpu_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): not a power of two greater than 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['memory_cost' => -1],
+                array('memory_cost' => -1),
                 'Invalid value of key "memory_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['memory_cost' => 0],
+                array('memory_cost' => 0),
                 'Invalid value of key "memory_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['memory_cost' => PHP_INT_MAX + 1],
+                array('memory_cost' => PHP_INT_MAX + 1),
                 'Invalid value of key "memory_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['memory_cost' => PHP_INT_MAX + 2],
+                array('memory_cost' => PHP_INT_MAX + 2),
                 'Invalid value of key "memory_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['parallelization_cost' => -1],
+                array('parallelization_cost' => -1),
                 'Invalid value of key "parallelization_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['parallelization_cost' => 0],
+                array('parallelization_cost' => 0),
                 'Invalid value of key "parallelization_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['parallelization_cost' => PHP_INT_MAX + 1],
+                array('parallelization_cost' => PHP_INT_MAX + 1),
                 'Invalid value of key "parallelization_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['parallelization_cost' => PHP_INT_MAX + 2],
+                array('parallelization_cost' => PHP_INT_MAX + 2),
                 'Invalid value of key "parallelization_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['key_length' => -1],
+                array('key_length' => -1),
                 'Invalid value of key "key_length" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 16'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['key_length' => 15],
+                array('key_length' => 15),
                 'Invalid value of key "key_length" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 16'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['key_length' => 15],
+                array('key_length' => 15),
                 'Invalid value of key "key_length" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 16'
-            ],
-            [
+            ),
+            array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
-                ['invalid_option' => 123],
+                array('invalid_option' => 123),
                 'Invalid key "invalid_option" in argument 3 ("$options") for lstrojny\scrypt\hash()'
-            ]
-        ];
+            )
+        );
     }
 
     /** @dataProvider getErrors */
