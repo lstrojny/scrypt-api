@@ -6,4 +6,5 @@ php:
   - hhvm
 
 before_script:
+  - sudo pecl install scrypt
   - composer install
