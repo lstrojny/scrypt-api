@@ -58,6 +58,11 @@ class ScryptTest extends \PHPUnit_Framework_TestCase
             ),
             array(
                 'lstrojny\scrypt\exception\InvalidArgumentException',
+                array('cpu_cost' => 1),
+                'Invalid value of key "cpu_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): not a power of two greater than 1'
+            ),
+            array(
+                'lstrojny\scrypt\exception\InvalidArgumentException',
                 array('memory_cost' => -1),
                 'Invalid value of key "memory_cost" in argument 3 ("$options") for lstrojny\scrypt\hash(): is not >= 1'
             ),

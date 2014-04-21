@@ -115,7 +115,7 @@ namespace lstrojny\scrypt {
             );
         }
 
-        if (($options['cpu_cost'] & ($options['cpu_cost'] - 1)) || $options['cpu_cost'] === 0) {
+        if ($options['cpu_cost'] < 2 || ($options['cpu_cost'] & ($options['cpu_cost'] - 1)) || $options['cpu_cost'] === 0) {
             throw InvalidArgumentException::invalidArrayKeyValue(
                 __FUNCTION__,
                 3,
