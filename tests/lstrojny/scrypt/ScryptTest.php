@@ -3,6 +3,7 @@ namespace lstrojny\tests\scrypt;
 
 use lstrojny\scrypt;
 
+/** @large */
 class ScryptTest extends \PHPUnit_Framework_TestCase
 {
     private $hash = '65536$8$1$64$YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWE=$293567c0a58a1b393f13f2ac882142f0064ff59b94d5e2c6ee62f4717d361b3e4b7786d23826bd0dda67ced7e3bf37e1d8272bcb171aec254eedf3cec81be91b';
